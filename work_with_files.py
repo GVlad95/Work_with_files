@@ -1,4 +1,4 @@
-from os import path
+from pprint import pprint
 
 with open('recipes.txt', 'rt', encoding='utf8') as f:
     menu = {}
@@ -12,15 +12,12 @@ with open('recipes.txt', 'rt', encoding='utf8') as f:
             ingredients.append({'ingr_name': ingr_name, 'quantity': int(quantity), 'measure': measure})
         f.readline()
         menu[dish] = ingredients
-print(menu)
+    pprint(menu)
 
 dishes_list = []
 for key in menu.keys():
     dishes_list.append(key)
 print(f'В меню входит: {", ".join(dishes_list)}')
-
-dishes = input('Что бы вы хотели заказать? ').split()
-person_count = int(input('Введите количество персон: '))
 
 
 def get_shop_list_by_dishes(dishes, person):
@@ -34,9 +31,9 @@ def get_shop_list_by_dishes(dishes, person):
                     shop_list[ingr] = dish
                 else:
                     shop_list[ingr]['quantity'] += shop_list[ingr]['quantity']
-    return print(shop_list)
+    return pprint(shop_list)
 
 
+dishes = input('Что бы вы хотели заказать?. (Названия указывать через запятую): ').lower().strip().split(',')
+person_count = int(input('Введите количество персон: '))
 get_shop_list_by_dishes(dishes, person_count)
-
-
